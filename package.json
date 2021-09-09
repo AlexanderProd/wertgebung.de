@@ -5,8 +5,14 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@react-three/drei": "^7.6.0",
+    "@react-three/fiber": "^7.0.6",
+    "animejs": "^3.2.1",
     "gatsby": "^3.13.0",
-    "gatsby-plugin-gatsby-cloud": "^2.11.0",
+    "gatsby-plugin-emotion": "^6.13.0",
     "gatsby-plugin-image": "^1.13.0",
     "gatsby-plugin-manifest": "^3.13.0",
     "gatsby-plugin-offline": "^4.13.0",
@@ -16,8 +22,10 @@
     "gatsby-transformer-sharp": "^3.13.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.1",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "three": "^0.132.2"
   },
   "devDependencies": {
     "prettier": "2.3.2"

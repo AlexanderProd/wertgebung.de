@@ -1,0 +1,11 @@
+html,
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: black;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <video src="/sequenz.mp4" type="video/mp4" loop muted autoplay playsinline></video>
+  <script>
+    /* Element.prototype.setAttributes = function (obj) {
+      for (var prop in obj) {
+        this.setAttribute(prop, obj[prop])
+      }
+    }
+
+    document.body.appendChild(document.createElement('video').setAttributes({
+      src: '/sequenz.mp4',
+      loop: '',
+      muted: '',
+      autoplay: '',
+      playsinline: '',
+    })) */
+
+    const elem = document.createElement('video')
+    elem.setAttribute('src', '/sequenz.mp4')
+    elem.setAttribute('loop', '')
+    elem.setAttribute('muted', '')
+    elem.setAttribute('autoplay', '')
+    elem.setAttribute('playsinline', '')
+    elem.setAttribute('type', 'video/mp4')
+
+    document.body.appendChild(elem)
+
+    /* document.body.appendChild(
+      Object.assign(document.createElement('video'), {
+        src: '/sequenz.mp4',
+        //crossOrigin: 'Anonymous',
+        loop: true,
+        muted: true,
+        autoplay: true,
+        playsinline: true,
+        preload: 'metadata',
+        type: 'video/mp4'
+      })) */
+  </script>
+</body>
+
+</html>
