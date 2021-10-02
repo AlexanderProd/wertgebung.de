@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "wertgebung.de",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Design & Technology",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Alexander Hörl <hoerl@wertgebung.de>",
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.4.1",
@@ -13,6 +13,7 @@
     "animejs": "^3.2.1",
     "gatsby": "^3.13.0",
     "gatsby-plugin-emotion": "^6.13.0",
+    "gatsby-plugin-google-gtag": "^3.14.0",
     "gatsby-plugin-image": "^1.13.0",
     "gatsby-plugin-manifest": "^3.13.0",
     "gatsby-plugin-offline": "^4.13.0",
@@ -20,6 +21,7 @@
     "gatsby-plugin-sharp": "^3.13.0",
     "gatsby-source-filesystem": "^3.13.0",
     "gatsby-transformer-sharp": "^3.13.0",
+    "gsap": "^3.7.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-device-detect": "^1.17.0",
@@ -35,13 +37,14 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby clean && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy": "yarn build && rclone sync -P public Wertgebung_PHP-Friends:/wertgebung.de/"
   },
   "repository": {
     "type": "git",

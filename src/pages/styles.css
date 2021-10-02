@@ -13,7 +13,7 @@ body,
 }
 
 body {
-  font-family: "Inter var", sans-serif;
+  font-family: 'Inter var', sans-serif;
   color: white;
   background: #101010;
   user-select: none;
@@ -99,4 +99,13 @@ body {
 .menu a:hover {
   text-decoration: underline;
   color: inherit;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

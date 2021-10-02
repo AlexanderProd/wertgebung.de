@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import styled from "@emotion/styled"
 import anime from "animejs"
+import gsap from "gsap"
 
 import "./styles.css"
 
@@ -39,6 +40,36 @@ function Opener({ videoLoaded, setReady }) {
   //const [firstAnimationDone, setFirstAnimationDone] = useState(false)
 
   useEffect(() => {
+    const tl = gsap.timeline()
+    tl.to(".grey-bars .top", {
+      duration: 1,
+      height: 0,
+      stagger: 0.02,
+      ease: "none",
+    })
+    tl.to(
+      ".grey-bars .bottom",
+      {
+        duration: 1,
+        height: 0,
+        stagger: 0.02,
+        ease: "none",
+      },
+      0
+    )
+    tl.from(
+      "svg#Logo path",
+      {
+        duration: 1,
+        y: 100,
+        stagger: 0.05,
+        ease: "power2.in",
+      },
+      0
+    )
+  }, [])
+
+  /* useEffect(() => {
     ;(async () => {
       anime({
         targets: ".grey-bars .top",
@@ -68,9 +99,9 @@ function Opener({ videoLoaded, setReady }) {
 
       //setFirstAnimationDone(true)
     })()
-  }, [])
+  }, []) */
 
-  useEffect(() => {
+  /* useEffect(() => {
     ;(async () => {
       while (!videoLoaded) {
         await sleep(500)
@@ -87,10 +118,29 @@ function Opener({ videoLoaded, setReady }) {
       }).finished
       setReady(true)
     })()
+  }, [videoLoaded]) */
+
+  useEffect(() => {
+    ;(async () => {
+      while (!videoLoaded) {
+        await sleep(500)
+      }
+
+      await sleep(1000)
+
+      await gsap
+        .to("svg#Logo path", {
+          duration: 1,
+          y: -100,
+          stagger: 0.05,
+          ease: "power2.out",
+        })
+        .eventCallback("onComplete", () => setReady(true))
+    })()
   }, [videoLoaded])
 
   return (
-    <>
+    <Wrapper>
       <div className="grey-bars">
         {Array(8)
           .fill("")
@@ -154,7 +204,7 @@ function Opener({ videoLoaded, setReady }) {
           />
         </svg>
       </LogoWrapper>
-    </>
+    </Wrapper>
   )
 }
 
