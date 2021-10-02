@@ -2,13 +2,15 @@ import * as THREE from 'three'
 import styled from '@emotion/styled'
 import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Reflector, useTexture, useProgress } from '@react-three/drei'
-import './styles.css'
+import { useProgress } from '@react-three/drei'
 
+import Seo from '../components/seo'
 import { Center } from '../utils/styles'
 import Overlay from '../components/Overlay'
-import Opener from '../components/Opener'
+import LoadingScreen from '../components/LoadingScreen'
+import Ground from '../components/Ground'
 import VideoText from '../components/VideoText'
+import './styles.css'
 
 const MainWrapper = styled.div`
   top: 0;
@@ -31,36 +33,6 @@ const Main = styled.main`
   justify-content: center;
   align-items: center;
 `
-
-function Ground(props) {
-  const [floor, normal] = useTexture([
-    '/SurfaceImperfections003_1K_var1.jpg',
-    '/SurfaceImperfections003_1K_Normal.jpg',
-  ])
-  return (
-    <Reflector
-      resolution={512}
-      args={[20, 10]}
-      mirror={0.4}
-      mixBlur={8}
-      mixStrength={1}
-      rotation={[-Math.PI / 2, 0, Math.PI / 2]}
-      blur={[400, 100]}
-      {...props}
-    >
-      {(Material, props) => (
-        <Material
-          color="#a0a0a0"
-          metalness={0.4}
-          roughnessMap={floor}
-          normalMap={normal}
-          normalScale={[1, 1]}
-          {...props}
-        />
-      )}
-    </Reflector>
-  )
-}
 
 function Intro({ start, scrollProgress }) {
   const [vec] = useState(() => new THREE.Vector3())
@@ -113,7 +85,8 @@ function IndexPage() {
 
   return (
     <>
-      <Opener {...store} />
+      <Seo />
+      <LoadingScreen {...store} />
       <Overlay {...store} />
 
       <Canvas
@@ -128,7 +101,6 @@ function IndexPage() {
         <fog attach="fog" args={['black', 15, 20]} />
         <Suspense fallback={null}>
           <group position={[0, -1, 0]}>
-            {/* <VideoBackground {...store} position={[0, 1.5, 0]} /> */}
             <VideoText {...store} position={[0, 1, 0]} />
             <Ground position={[0, 0, 7]} />
           </group>

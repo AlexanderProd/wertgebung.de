@@ -10,7 +10,7 @@ function Overlay({ loaded, ready, clicked, setClicked, videoLoaded }) {
   useEffect(() => {
     if (ready) {
       setTimeout(() => {
-        scrollNoticeRef.current.style.opacity = '1'
+        scrollNoticeRef.current.style.opacity = '0.8'
       }, 1000)
     }
   }, [ready])

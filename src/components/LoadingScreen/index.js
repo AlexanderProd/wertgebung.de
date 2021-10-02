@@ -1,19 +1,18 @@
-import React, { useEffect } from "react"
-import styled from "@emotion/styled"
-import anime from "animejs"
-import gsap from "gsap"
+import React, { useEffect } from 'react'
+import styled from '@emotion/styled'
+import gsap from 'gsap'
 
-import "./styles.css"
+import './styles.css'
 
 const GreyBar = styled.div`
   height: ${({ i }) =>
-    i <= 1 ? "50%" : i <= 3 ? "40%" : i <= 5 ? "30%" : "20%"};
+    i <= 1 ? '50%' : i <= 3 ? '40%' : i <= 5 ? '30%' : '20%'};
   z-index: ${({ i }) => `${30 + i}`};
-  ${({ topOrBottom }) => (topOrBottom === "top" ? "top: 0;" : "bottom: 0;")};
+  ${({ topOrBottom }) => (topOrBottom === 'top' ? 'top: 0;' : 'bottom: 0;')};
   position: absolute;
   width: 100%;
   background-color: ${({ i }) =>
-    i <= 1 ? "#444" : i <= 3 ? "#333" : i <= 5 ? "#222" : "#111"};
+    i <= 1 ? '#444' : i <= 3 ? '#333' : i <= 5 ? '#222' : '#111'};
 `
 
 const Wrapper = styled.div`
@@ -36,89 +35,38 @@ const LogoWrapper = styled.div`
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-function Opener({ videoLoaded, setReady }) {
+function LoadingScreen({ videoLoaded, setReady }) {
   //const [firstAnimationDone, setFirstAnimationDone] = useState(false)
 
   useEffect(() => {
     const tl = gsap.timeline()
-    tl.to(".grey-bars .top", {
+    tl.to('.grey-bars .top', {
       duration: 1,
       height: 0,
       stagger: 0.02,
-      ease: "none",
+      ease: 'none',
     })
     tl.to(
-      ".grey-bars .bottom",
+      '.grey-bars .bottom',
       {
         duration: 1,
         height: 0,
         stagger: 0.02,
-        ease: "none",
+        ease: 'none',
       },
       0
     )
     tl.from(
-      "svg#Logo path",
+      'svg#Logo path',
       {
         duration: 1,
         y: 100,
         stagger: 0.05,
-        ease: "power2.in",
+        ease: 'power2.in',
       },
       0
     )
   }, [])
-
-  /* useEffect(() => {
-    ;(async () => {
-      anime({
-        targets: ".grey-bars .top",
-        height: 0,
-        easing: "linear",
-        duration: 400,
-        delay: anime.stagger(20, { direction: "reverse" }),
-      })
-      anime({
-        targets: ".grey-bars .bottom",
-        height: 0,
-        easing: "linear",
-        duration: 400,
-        delay: anime.stagger(20, { direction: "reverse" }),
-      })
-
-      await anime({
-        targets: "svg#Logo path",
-        translateY: 100,
-        duration: 500,
-        delay: anime.stagger(50, {
-          direction: "reverse",
-        }),
-        direction: "reverse",
-        easing: "easeInQuad",
-      }).finished
-
-      //setFirstAnimationDone(true)
-    })()
-  }, []) */
-
-  /* useEffect(() => {
-    ;(async () => {
-      while (!videoLoaded) {
-        await sleep(500)
-      }
-
-      await sleep(1000)
-
-      await anime({
-        targets: "svg#Logo path",
-        translateY: -100,
-        duration: 500,
-        delay: anime.stagger(50, {}),
-        easing: "easeInQuad",
-      }).finished
-      setReady(true)
-    })()
-  }, [videoLoaded]) */
 
   useEffect(() => {
     ;(async () => {
@@ -129,13 +77,13 @@ function Opener({ videoLoaded, setReady }) {
       await sleep(1000)
 
       await gsap
-        .to("svg#Logo path", {
+        .to('svg#Logo path', {
           duration: 1,
           y: -100,
           stagger: 0.05,
-          ease: "power2.out",
+          ease: 'power2.out',
         })
-        .eventCallback("onComplete", () => setReady(true))
+        .eventCallback('onComplete', () => setReady(true))
     })()
   }, [videoLoaded])
 
@@ -143,11 +91,11 @@ function Opener({ videoLoaded, setReady }) {
     <Wrapper>
       <div className="grey-bars">
         {Array(8)
-          .fill("")
+          .fill('')
           .map((_, i) => (
             <GreyBar
-              className={i % 2 === 0 ? "top" : "bottom"}
-              topOrBottom={i % 2 === 0 ? "top" : "bottom"}
+              className={i % 2 === 0 ? 'top' : 'bottom'}
+              topOrBottom={i % 2 === 0 ? 'top' : 'bottom'}
               i={i}
               key={i}
             />
@@ -208,4 +156,4 @@ function Opener({ videoLoaded, setReady }) {
   )
 }
 
-export default Opener
+export default LoadingScreen
