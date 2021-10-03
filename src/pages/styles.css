@@ -16,7 +16,13 @@ body {
   font-family: 'Inter var', sans-serif;
   color: white;
   background: #101010;
-  user-select: none;
+}
+
+::-moz-selection {
+  color: #ec3d44;
+}
+::selection {
+  color: #ec3d44;
 }
 
 .fullscreen {

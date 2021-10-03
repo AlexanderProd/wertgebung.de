@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 export const colors = {
@@ -7,6 +8,7 @@ export const colors = {
 }
 
 export const breakpoints = {
+  xs: 320,
   s: 576,
   m: 768,
   l: 992,
@@ -95,12 +97,63 @@ export const space = {
   96: '24rem',
 }
 
+export const Delayed = ({ children, delay = 500 }) => {
+  const [isShown, setIsShown] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsShown(true)
+    }, delay)
+  }, [delay])
+
+  return isShown ? children : null
+}
+
 export const Center = styled.div`
   text-align: center;
 `
 
 export const Container = styled.div`
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1920px;
   padding: 0 ${space[6]};
+`
+
+export const TwoColumnGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: ${({ gap }) => (gap ? gap : '2.5rem')};
+  grid-auto-flow: row dense;
+  ${({ backgroundColor }) =>
+    backgroundColor ? `background-color: ${backgroundColor};` : null};
+
+  & > :nth-of-type(4n - 1) {
+    grid-column-start: 2;
+  }
+
+  @media (max-width: ${breakpoints.l}px) {
+    display: block;
+
+    & > * {
+      margin-bottom: ${({ gap }) => (gap ? gap : '2.5rem')};
+    }
+
+    & > :last-child {
+      margin-bottom: 0rem;
+    }
+  }
+`
+
+export const Text = styled.p`
+  color: ${colors.grey};
+  line-height: ${lineHeights.base};
+  font-size: ${fontSizes.xl};
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes.sm};
+  }
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes.md};
+  }
 `

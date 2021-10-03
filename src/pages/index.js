@@ -1,15 +1,24 @@
 import * as THREE from 'three'
 import styled from '@emotion/styled'
 import React, { Suspense, useEffect, useState, useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useProgress } from '@react-three/drei'
+import { StaticImage } from 'gatsby-plugin-image'
 
 import Seo from '../components/seo'
-import { Center } from '../utils/styles'
+import {
+  Container,
+  fontSizes,
+  TwoColumnGrid,
+  Text,
+  Delayed,
+  breakpoints,
+} from '../utils/styles'
 import Overlay from '../components/Overlay'
 import LoadingScreen from '../components/LoadingScreen'
 import Ground from '../components/Ground'
 import VideoText from '../components/VideoText'
+import { useOnScreen } from '../utils/hooks'
 import './styles.css'
 
 const MainWrapper = styled.div`
@@ -20,18 +29,30 @@ const MainWrapper = styled.div`
   width: 100%;
 `
 
-const ScrollDiv = styled.div`
+const Scroll = styled.div`
   width: 100%;
   min-height: 400vh;
 `
 
 const Main = styled.main`
-  display: flex;
-  height: 100vh;
   width: 100%;
   margin-top: 100vh;
-  justify-content: center;
-  align-items: center;
+`
+
+const Headline = styled.h1`
+  font-size: ${fontSizes['8xl']};
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes['6xl']};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes['5xl']};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes['4xl']};
+  }
 `
 
 function Intro({ start, scrollProgress }) {
@@ -56,7 +77,8 @@ function IndexPage() {
   const [videoLoaded, setVideoLoaded] = useState(false)
   const { loaded, progress } = useProgress()
   const scrollProgress = useRef(0)
-  const scrollDivRef = useRef(null)
+  const scrollRef = useRef(null)
+  const mainRef = useRef()
 
   const store = {
     loaded,
@@ -74,7 +96,7 @@ function IndexPage() {
     const onScroll = e => {
       scrollProgress.current =
         e.target.documentElement.scrollTop.toFixed(0) /
-        scrollDivRef.current.scrollHeight
+        scrollRef.current.scrollHeight
 
       scrollProgress.current = Math.max(0, Math.min(scrollProgress.current, 1))
     }
@@ -82,6 +104,8 @@ function IndexPage() {
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const mainIsVisible = useOnScreen(mainRef, '-500px')
 
   return (
     <>
@@ -96,7 +120,11 @@ function IndexPage() {
         camera={{ position: [0, 3, 100], fov: 15 }}
         style={{ position: 'fixed' }}
       >
-        {/* !canvasVisible && <DisableRender /> */}
+        {mainIsVisible && (
+          <Delayed delay={2000}>
+            <DisableRender />
+          </Delayed>
+        )}
         <color attach="background" args={['black']} />
         <fog attach="fog" args={['black', 15, 20]} />
         <Suspense fallback={null}>
@@ -112,12 +140,34 @@ function IndexPage() {
       </Canvas>
 
       <MainWrapper>
-        <ScrollDiv ref={scrollDivRef}></ScrollDiv>
-        <Main>
-          <Center>
-            <h1>Site under Construction</h1>
-            <h2>More content coming soon</h2>
-          </Center>
+        <Scroll ref={scrollRef}></Scroll>
+
+        <Main ref={mainRef}>
+          <Container>
+            <Headline>
+              Wir entwickeln innovative Erlebnisse durch das perfekte
+              Zusammenspiel von Technologie und Design.
+            </Headline>
+          </Container>
+
+          <TwoColumnGrid style={{ marginTop: '300px' }}>
+            <Container>
+              <Text>
+                Hinter WERTGEBUNG stecken Jens Herga und Alexander Hörl.
+                Zusammengefunden haben sie schon während ihrer Schulzeit, durch
+                Ihr gemeinsames Interesse an Design. Seither bestimmt dieser
+                Zusammenschluss die unverkennbare Handschrift von WERTGEBUNG.  
+              </Text>
+            </Container>
+
+            <StaticImage
+              src="../images/IMG_0330.jpeg"
+              layout="fullWidth"
+              alt="Jens Herga &amp; Alexander Hörl"
+              loading="lazy"
+              objectFit="contain"
+            />
+          </TwoColumnGrid>
         </Main>
       </MainWrapper>
     </>
