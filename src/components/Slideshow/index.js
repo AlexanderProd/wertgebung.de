@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, invalidate, useFrame } from '@react-three/fiber'
 import { Text, Loader, Shadow } from '@react-three/drei'
+import { isBrowser } from '@emotion/utils'
 
 import { Wrapper, Scroll, ScrollWrapper } from './styles'
 import { Block, useBlock } from './blocks'
@@ -106,7 +107,7 @@ function Sliedshow() {
         frameloop="demand"
         concurrent
         gl={{ alpha: false }}
-        dpr={Math.max(window !== undefined ? window.devicePixelRatio : 0, 2)}
+        dpr={Math.max(isBrowser ? window.devicePixelRatio : 0, 2)}
         pixelRatio={[1, 1.5]}
         camera={{ position: [0, 3, 35], fov: 15 }}
         raycaster={{

@@ -1,17 +1,17 @@
 [
   {
     "name": "NurEinBerg",
-    "imgSrc": "/nureinberg.de_.png",
+    "imgSrc": "/nureinberg.jpg",
     "url": "https://nureinberg.de"
   },
   {
     "name": "Lightweight System",
-    "imgSrc": "/lightweight-system.com_.png",
+    "imgSrc": "/lightweight-system.jpg",
     "url": "https://lightweight-system.com"
   },
   {
     "name": "Huwat",
-    "imgSrc": "/huwat.com_.png",
+    "imgSrc": "/huwat.jpg",
     "url": "https://huwat.com"
   }
 ]
