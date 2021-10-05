@@ -1,11 +1,17 @@
 import * as THREE from 'three'
 import styled from '@emotion/styled'
 import React, { Suspense, useEffect, useState, useRef } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useProgress } from '@react-three/drei'
 import { StaticImage } from 'gatsby-plugin-image'
 
 import Seo from '../components/seo'
+import Overlay from '../components/Overlay'
+import LoadingScreen from '../components/LoadingScreen'
+import Ground from '../components/Ground'
+import VideoText from '../components/VideoText'
+import Sliedshow from '../components/Slideshow'
+import { useOnScreen } from '../utils/hooks'
 import {
   Container,
   fontSizes,
@@ -14,11 +20,6 @@ import {
   Delayed,
   breakpoints,
 } from '../utils/styles'
-import Overlay from '../components/Overlay'
-import LoadingScreen from '../components/LoadingScreen'
-import Ground from '../components/Ground'
-import VideoText from '../components/VideoText'
-import { useOnScreen } from '../utils/hooks'
 import './styles.css'
 
 const MainWrapper = styled.div`
@@ -31,7 +32,7 @@ const MainWrapper = styled.div`
 
 const Scroll = styled.div`
   width: 100%;
-  min-height: 400vh;
+  min-height: 500vh;
 `
 
 const Main = styled.main`
@@ -150,13 +151,13 @@ function IndexPage() {
             </Headline>
           </Container>
 
-          <TwoColumnGrid style={{ marginTop: '300px' }}>
+          <TwoColumnGrid style={{ marginTop: '300px', marginBottom: '300px' }}>
             <Container>
               <Text>
                 Hinter WERTGEBUNG stecken Jens Herga und Alexander Hörl.
                 Zusammengefunden haben sie schon während ihrer Schulzeit, durch
                 Ihr gemeinsames Interesse an Design. Seither bestimmt dieser
-                Zusammenschluss die unverkennbare Handschrift von WERTGEBUNG.  
+                Zusammenschluss die unverkennbare Handschrift von WERTGEBUNG.😎
               </Text>
             </Container>
 
@@ -169,6 +170,8 @@ function IndexPage() {
             />
           </TwoColumnGrid>
         </Main>
+
+        <Sliedshow />
       </MainWrapper>
     </>
   )

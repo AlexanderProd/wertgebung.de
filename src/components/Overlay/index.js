@@ -8,7 +8,7 @@ function Overlay({ loaded, ready, clicked, setClicked, videoLoaded }) {
   const scrollNoticeRef = useRef(null)
 
   useEffect(() => {
-    if (ready) {
+    if (ready && scrollNoticeRef.current) {
       setTimeout(() => {
         scrollNoticeRef.current.style.opacity = '0.8'
       }, 1000)
@@ -18,7 +18,7 @@ function Overlay({ loaded, ready, clicked, setClicked, videoLoaded }) {
   useEffect(() => {
     const onScroll = () => {
       setTimeout(() => {
-        scrollNoticeRef.current.style.opacity = '0'
+        if (scrollNoticeRef.current) scrollNoticeRef.current.style.opacity = '0'
         window.removeEventListener('scroll', onScroll)
       }, 1000)
     }
