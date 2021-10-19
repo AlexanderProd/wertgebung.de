@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useFrame } from '@react-three/fiber'
 import styled from '@emotion/styled'
 
 export const colors = {
@@ -96,6 +97,8 @@ export const space = {
   80: '20rem',
   96: '24rem',
 }
+
+export const DisableRender = () => useFrame(() => null, 1000)
 
 export const Delayed = ({ children, delay = 500 }) => {
   const [isShown, setIsShown] = useState(false)

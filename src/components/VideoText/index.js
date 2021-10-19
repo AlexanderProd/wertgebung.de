@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import React, { useState, useEffect } from 'react'
+import { useThree } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
 import { isMobileSafari } from 'react-device-detect'
 
@@ -47,11 +48,14 @@ function VideoText({ position, videoLoaded, setVideoLoaded }) {
 
   useEffect(() => void video.play(), [video])
 
+  const fontSize = width >= 320 ? 0.4 : 1
+
   return (
     <Text
       font="/Inter-Bold.woff"
       fontSize={width < 425 ? 0.4 : 1}
       maxWidth={width < 425 ? 2 : 5}
+      /* scale={scale} */
       letterSpacing={-0.06}
       lineHeight={0.8}
       position={position}

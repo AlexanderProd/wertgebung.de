@@ -10,7 +10,7 @@ import Overlay from '../components/Overlay'
 import LoadingScreen from '../components/LoadingScreen'
 import Ground from '../components/Ground'
 import VideoText from '../components/VideoText'
-import Sliedshow from '../components/Slideshow'
+import PortfolioMap from '../components/PortfolioMap'
 import { useOnScreen } from '../utils/hooks'
 import {
   Container,
@@ -18,6 +18,7 @@ import {
   TwoColumnGrid,
   Text,
   Delayed,
+  DisableRender,
   breakpoints,
 } from '../utils/styles'
 import './styles.css'
@@ -32,7 +33,7 @@ const MainWrapper = styled.div`
 
 const Scroll = styled.div`
   width: 100%;
-  min-height: 500vh;
+  min-height: 400vh;
 `
 
 const Main = styled.main`
@@ -70,8 +71,6 @@ function Intro({ start, scrollProgress }) {
   })
 }
 
-const DisableRender = () => useFrame(() => null, 1000)
-
 function IndexPage() {
   const [clicked, setClicked] = useState(true)
   const [ready, setReady] = useState(false)
@@ -80,6 +79,7 @@ function IndexPage() {
   const scrollProgress = useRef(0)
   const scrollRef = useRef(null)
   const mainRef = useRef()
+  const mainIsVisible = useOnScreen(mainRef, '-500px')
 
   const store = {
     loaded,
@@ -105,8 +105,6 @@ function IndexPage() {
 
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  const mainIsVisible = useOnScreen(mainRef, '-500px')
 
   return (
     <>
@@ -169,9 +167,8 @@ function IndexPage() {
               objectFit="contain"
             />
           </TwoColumnGrid>
+          <PortfolioMap />
         </Main>
-
-        <Sliedshow />
       </MainWrapper>
     </>
   )
