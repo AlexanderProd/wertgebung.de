@@ -3,6 +3,8 @@ import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { MapControls, useTexture } from '@react-three/drei'
 import { a, useSpring } from '@react-spring/three'
+import { isBrowser } from '@emotion/utils'
+import { isMobileSafari } from 'react-device-detect'
 
 import { DisableRender } from '../../utils/styles'
 import { useOnScreen } from '../../utils/hooks'
@@ -13,16 +15,37 @@ const CARD_HEIGHT = 80
 
 function Card({ position, img, videoSrc, name, setName }) {
   const [hovered, set] = useState(false)
-  const [video] = useState(() =>
-    Object.assign(document.createElement('video'), {
-      src: videoSrc,
-      crossOrigin: 'Anonymous',
-      loop: true,
-      muted: true,
-    })
-  )
-  video.crossOrigin = 'anonymous'
-  useEffect(() => void video.play(), [video])
+  const [video] = useState(() => {
+    if (isMobileSafari) {
+      const elem = document.createElement('video')
+      elem.setAttribute('src', videoSrc)
+      elem.setAttribute('loop', '')
+      elem.setAttribute('muted', '')
+      elem.setAttribute('autoplay', '')
+      elem.setAttribute('playsinline', '')
+      elem.setAttribute('type', 'video/mp4')
+      elem.setAttribute('preload', 'metadata')
+      elem.setAttribute('crossOrigin', 'Anonymous')
+
+      return elem
+    } else {
+      const elem = Object.assign(document.createElement('video'), {
+        src: videoSrc,
+        crossOrigin: 'Anonymous',
+        loop: true,
+        muted: true,
+        autoplay: true,
+        playsinline: true,
+        preload: 'metadata',
+      })
+
+      return elem
+    }
+  })
+
+  useEffect(() => {
+    if (videoSrc) video.play()
+  }, [video])
 
   const { scale, opacity } = useSpring({
     scale: hovered ? 1.05 : 1,
@@ -92,7 +115,7 @@ function PortfolioMap() {
       <Canvas
         orthographic
         frameloop="always"
-        dpr={Math.max(window !== undefined ? window.devicePixelRatio : 0, 2)}
+        dpr={Math.max(isBrowser ? window.devicePixelRatio : 0, 2)}
         pixelRatio={[1, 1.5]}
         camera={{ position: [0, 0, 1], zoom: 4, up: [0, 0, 1], far: 10000 }}
       >
