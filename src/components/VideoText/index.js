@@ -1,77 +1,53 @@
 import * as THREE from 'three'
 import React, { useState, useEffect } from 'react'
-import { useThree } from '@react-three/fiber'
 import { Text } from '@react-three/drei'
-import { isMobileSafari } from 'react-device-detect'
+import { a, useSpring } from '@react-spring/three'
 
-import { useWindowDimensions } from '../../utils/hooks'
-
-function VideoText({ position, videoLoaded, setVideoLoaded }) {
-  const { width } = useWindowDimensions()
-
-  const [video] = useState(() => {
-    const loadedDataHandler = ({ target }) => {
-      if (target.readyState >= 2) {
-        setVideoLoaded(true)
-      }
-    }
-
-    if (isMobileSafari) {
-      const elem = document.createElement('video')
-      elem.setAttribute('src', '/sequenz.mp4')
-      elem.setAttribute('loop', '')
-      elem.setAttribute('muted', '')
-      elem.setAttribute('autoplay', '')
-      elem.setAttribute('playsinline', '')
-      elem.setAttribute('type', 'video/mp4')
-      elem.setAttribute('preload', 'metadata')
-      elem.setAttribute('crossOrigin', 'Anonymous')
-
-      elem.addEventListener('loadeddata', loadedDataHandler)
-
-      return elem
-    } else {
-      const elem = Object.assign(document.createElement('video'), {
-        src: '/sequenz.mp4',
-        crossOrigin: 'Anonymous',
-        loop: true,
-        muted: true,
-        autoplay: true,
-        playsinline: true,
-        preload: 'metadata',
-      })
-      elem.addEventListener('loadeddata', loadedDataHandler)
-
-      return elem
-    }
+const StyledText = ({ children, position, animated = false }) => {
+  const { opacity } = useSpring({
+    loop: true,
+    to: [{ opacity: 0.05 }, { opacity: 1 }],
+    from: { opacity: 1 },
+    config: {
+      mass: 1,
+      tension: 48,
+      friction: 2,
+      precision: 0.01,
+    },
   })
-
-  useEffect(() => void video.play(), [video])
-
-  const fontSize = width >= 320 ? 0.4 : 1
 
   return (
     <Text
       font="/Inter-Bold.woff"
-      fontSize={width < 425 ? 0.4 : 1}
-      maxWidth={width < 425 ? 2 : 5}
-      /* scale={scale} */
+      fontSize={1}
+      maxWidth={5}
       letterSpacing={-0.06}
-      lineHeight={0.8}
       position={position}
+      lineHeight={0.8}
     >
-      Design &amp; Technologie
-      <meshBasicMaterial
-        //color={0x000}
+      {children}
+      <a.meshBasicMaterial
+        opacity={animated ? opacity : 1}
+        color={0xfff7f8}
         toneMapped={false}
-      >
-        <videoTexture
-          attach="map"
-          args={[video]}
-          encoding={THREE.sRGBEncoding}
-        />
-      </meshBasicMaterial>
+      />
     </Text>
+  )
+}
+
+function VideoText({ position }) {
+  const [start, setStart] = useState(false)
+
+  useEffect(() => setTimeout(() => setStart(true), 1000), [])
+
+  return (
+    <group position={position} scale={[1, 1, 1]}>
+      <StyledText position={[-2, 0, 0]}>WER</StyledText>
+      <StyledText position={[0, 0, 0]} animated={true}>
+        TGE
+      </StyledText>
+      <StyledText position={[2.25, 0, 0]}>BUNG</StyledText>
+    </group>
   )
 }
 

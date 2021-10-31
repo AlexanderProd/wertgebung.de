@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import styled from '@emotion/styled'
+import { OutboundLink } from 'gatsby-plugin-google-gtag'
+import { Link } from 'gatsby'
 
 export const colors = {
   grey: '#C6C6C5',
   darkGrey: '#606060',
   carminePink: '#ec3d44',
+  concrete: '#f2f2f2',
 }
 
 export const breakpoints = {
@@ -148,9 +151,9 @@ export const TwoColumnGrid = styled.div`
 `
 
 export const Text = styled.p`
-  color: ${colors.grey};
+  color: ${({ color }) => (color ? color : colors.concrete)};
   line-height: ${lineHeights.base};
-  font-size: ${fontSizes.xl};
+  font-size: ${fontSizes['3xl']};
 
   @media (max-width: ${breakpoints.s}px) {
     font-size: ${fontSizes.sm};
@@ -158,5 +161,25 @@ export const Text = styled.p`
 
   @media (max-width: ${breakpoints.m}px) {
     font-size: ${fontSizes.md};
+  }
+`
+
+export const InternalLink = styled(Link)`
+  color: ${({ color }) => (color ? color : 'white')};
+  transition: color ease-in-out 0.2s;
+
+  &:hover,
+  &:active {
+    color: ${colors.carminePink};
+  }
+`
+
+export const ExternalLink = styled(OutboundLink)`
+  color: ${({ color }) => (color ? color : 'white')};
+  transition: color ease-in-out 0.2s;
+
+  &:hover,
+  &:active {
+    color: ${colors.carminePink};
   }
 `

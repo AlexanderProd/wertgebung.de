@@ -2,16 +2,19 @@ import * as THREE from 'three'
 import styled from '@emotion/styled'
 import React, { Suspense, useEffect, useState, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useProgress } from '@react-three/drei'
+import { Loader, useProgress } from '@react-three/drei'
 import { StaticImage } from 'gatsby-plugin-image'
+import { animated, useSpring } from '@react-spring/web'
 
 import Seo from '../components/seo'
-import Overlay from '../components/Overlay'
-import LoadingScreen from '../components/LoadingScreen'
+//import Overlay from '../components/Overlay'
+//import LoadingScreen from '../components/LoadingScreen'
 import Ground from '../components/Ground'
 import VideoText from '../components/VideoText'
 import PortfolioMap from '../components/PortfolioMap'
-import { useOnScreen } from '../utils/hooks'
+import Footer from '../components/Footer'
+import { SwipeDownIcon } from '../components/ui/icons'
+import { useOnScreen, useWindowDimensions } from '../utils/hooks'
 import {
   Container,
   fontSizes,
@@ -57,6 +60,18 @@ const Headline = styled.h1`
   }
 `
 
+const Overlay = styled.div`
+  z-index: 10;
+  position: fixed;
+  width: 100%;
+  height: 20%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 function Intro({ start, scrollProgress }) {
   const [vec] = useState(() => new THREE.Vector3())
 
@@ -73,13 +88,15 @@ function Intro({ start, scrollProgress }) {
 
 function IndexPage() {
   const [clicked, setClicked] = useState(true)
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(true)
   const [videoLoaded, setVideoLoaded] = useState(false)
   const { loaded, progress } = useProgress()
   const scrollProgress = useRef(0)
   const scrollRef = useRef(null)
   const mainRef = useRef()
   const mainIsVisible = useOnScreen(mainRef, '-500px')
+  const [iconVisible, setIconVisible] = useState(false)
+  const { width } = useWindowDimensions()
 
   const store = {
     loaded,
@@ -93,6 +110,7 @@ function IndexPage() {
     scrollProgress,
   }
 
+  // Move camera on scroll
   useEffect(() => {
     const onScroll = e => {
       scrollProgress.current =
@@ -106,14 +124,42 @@ function IndexPage() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Fade in SwipeDownIcon
+  useEffect(() => {
+    setTimeout(() => setIconVisible(true), 4000)
+  }, [ready])
+
+  // Fade out SwipeDownIcon
+  useEffect(() => {
+    const onScroll = () => {
+      setTimeout(() => {
+        setIconVisible(false)
+        window.removeEventListener('scroll', onScroll)
+      }, 1000)
+    }
+    window.addEventListener('scroll', onScroll)
+
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const iconStyle = useSpring({ opacity: iconVisible ? 0.8 : 0 })
+
   return (
     <>
-      <Seo />
-      <LoadingScreen {...store} />
-      <Overlay {...store} />
+      <Seo title="Design &amp; Technologie" />
+      <Overlay>
+        <animated.div style={iconStyle}>
+          <SwipeDownIcon
+            color="white"
+            height={width > breakpoints.l ? 60 : 30}
+          />
+        </animated.div>
+      </Overlay>
 
+      <Loader />
       <Canvas
         concurrent
+        frameloop="always"
         gl={{ alpha: false }}
         pixelRatio={[1, 1.5]}
         camera={{ position: [0, 3, 100], fov: 15 }}
@@ -127,9 +173,9 @@ function IndexPage() {
         <color attach="background" args={['black']} />
         <fog attach="fog" args={['black', 15, 20]} />
         <Suspense fallback={null}>
-          <group position={[0, -1, 0]}>
-            <VideoText {...store} position={[0, 1, 0]} />
-            <Ground position={[0, 0, 7]} />
+          <group position={[0, 0, 0]}>
+            <VideoText {...store} position={[0, 0, 0]} />
+            <Ground position={[0, -1, 7]} />
           </group>
           <ambientLight intensity={0.5} />
           <spotLight position={[0, 10, 0]} intensity={0.3} />
@@ -169,6 +215,7 @@ function IndexPage() {
           </TwoColumnGrid>
           <PortfolioMap />
         </Main>
+        <Footer color="white" />
       </MainWrapper>
     </>
   )

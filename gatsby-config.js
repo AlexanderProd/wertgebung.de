@@ -4,6 +4,16 @@ module.exports = {
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@alexanderhoerl`,
     siteUrl: `https://wertgebung.de/`,
+    socialLinks: [
+      {
+        name: 'Instagram',
+        link: 'https://instagram.com/wertgebung',
+      },
+      {
+        name: 'LinkedIn',
+        link: '/',
+      },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

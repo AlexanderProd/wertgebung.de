@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 
 export const useWindowDimensions = () => {
   const [windowDimensions, setWindowDimensions] = useState(
@@ -55,4 +56,23 @@ export const useOnScreen = (ref, rootMargin = '0px') => {
   }, []) // Empty array ensures that effect is only run on mount and unmount
 
   return isIntersecting
+}
+
+export const useSiteMetadata = () => {
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
+          socialLinks {
+            name
+            link
+          }
+        }
+      }
+    }
+  `)
+  return site.siteMetadata
 }
