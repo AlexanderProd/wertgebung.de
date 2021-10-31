@@ -180,7 +180,7 @@ const Impressum = () => (
         einverstanden.
       </span>
     </Container>
-    <Footer />
+    <Footer color="white" />
   </>
 )
 

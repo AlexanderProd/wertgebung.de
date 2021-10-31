@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { Suspense, useState, useEffect, useRef } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
-import { MapControls, OrbitControls } from '@react-three/drei'
+import { MapControls } from '@react-three/drei'
 import { a, useSpring } from '@react-spring/three'
 import { isBrowser } from '@emotion/utils'
 import { isMobileSafari } from 'react-device-detect'
