@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { Text } from '@react-three/drei'
 import { a, useSpring } from '@react-spring/three'
 
+import { useWindowDimensions } from '../../utils/hooks'
+import { breakpoints } from '../../utils/styles'
+
 const StyledText = ({ children, position, animated = false }) => {
   const { opacity } = useSpring({
     loop: true,
@@ -36,12 +39,22 @@ const StyledText = ({ children, position, animated = false }) => {
 }
 
 function VideoText({ position }) {
-  const [start, setStart] = useState(false)
+  const { width } = useWindowDimensions()
 
-  useEffect(() => setTimeout(() => setStart(true), 1000), [])
+  let scale = [1, 1, 1]
+
+  if (width > breakpoints.xl) {
+    scale = [1, 1, 1]
+  } else if (width > breakpoints.l) {
+    scale = [0.5, 0.5, 0.5]
+  } else if (width >= breakpoints.m) {
+    scale = [0.3, 0.3, 0.3]
+  } else if (width < breakpoints.s) {
+    scale = [0.2, 0.2, 0.2]
+  }
 
   return (
-    <group position={position} scale={[1, 1, 1]}>
+    <group position={position} scale={scale}>
       <StyledText position={[-2, 0, 0]}>WER</StyledText>
       <StyledText position={[0, 0, 0]} animated={true}>
         TGE
