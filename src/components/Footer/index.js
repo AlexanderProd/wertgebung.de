@@ -3,7 +3,7 @@ import React from 'react'
 import { useSiteMetadata } from '../../utils/hooks'
 import { Container, InternalLink, ExternalLink } from '../../utils/styles'
 import { Wrapper, SocialMediaLinks } from './styles'
-import { Instagram, Facebook, Pinterest, LinkedIn } from './icons'
+import { Instagram, Facebook, Pinterest, LinkedIn } from '../ui/icons'
 
 const Footer = ({ color = 'black' }) => {
   const { title, socialLinks } = useSiteMetadata()
@@ -51,9 +51,15 @@ const Footer = ({ color = 'black' }) => {
         </div>
 
         <div>
-          <InternalLink to="/impressum">Impressum</InternalLink>
+          <ExternalLink
+            href="/AGB.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AGB
+          </ExternalLink>
           <br />
-          <InternalLink to="/agb.pdf">AGB</InternalLink>
+          <InternalLink to="/impressum">Impressum</InternalLink>
           <br />© {new Date().getFullYear()} {title}
         </div>
 

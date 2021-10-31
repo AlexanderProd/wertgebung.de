@@ -76,3 +76,28 @@ export const useSiteMetadata = () => {
   `)
   return site.siteMetadata
 }
+
+export const useInViewportAnimation = () =>
+  useEffect(() => {
+    const targets = []
+
+    const inViewport = (entries, observer) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting && !targets.find(elem => elem === target)) {
+          target.classList.remove('hidden')
+          target.classList.toggle('is-inViewport', isIntersecting)
+          targets.push(target)
+        }
+      })
+    }
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    }
+    const Observer = new IntersectionObserver(inViewport, options)
+
+    const elementsInViewport = document.querySelectorAll('[data-inviewport]')
+    elementsInViewport.forEach(elem => Observer.observe(elem))
+  }, [])

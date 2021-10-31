@@ -14,7 +14,11 @@ import VideoText from '../components/VideoText'
 import PortfolioMap from '../components/PortfolioMap'
 import Footer from '../components/Footer'
 import { SwipeDownIcon } from '../components/ui/icons'
-import { useOnScreen, useWindowDimensions } from '../utils/hooks'
+import {
+  useInViewportAnimation,
+  useOnScreen,
+  useWindowDimensions,
+} from '../utils/hooks'
 import {
   Container,
   fontSizes,
@@ -98,6 +102,8 @@ function IndexPage() {
   const [iconVisible, setIconVisible] = useState(false)
   const { width } = useWindowDimensions()
 
+  useInViewportAnimation()
+
   const store = {
     loaded,
     progress,
@@ -151,7 +157,7 @@ function IndexPage() {
         <animated.div style={iconStyle}>
           <SwipeDownIcon
             color="white"
-            height={width > breakpoints.l ? 60 : 30}
+            height={width > breakpoints.l ? 60 : 40}
           />
         </animated.div>
       </Overlay>
@@ -201,17 +207,19 @@ function IndexPage() {
                 Hinter WERTGEBUNG stecken Jens Herga und Alexander Hörl.
                 Zusammengefunden haben sie schon während ihrer Schulzeit, durch
                 Ihr gemeinsames Interesse an Design. Seither bestimmt dieser
-                Zusammenschluss die unverkennbare Handschrift von WERTGEBUNG.😎
+                Zusammenschluss die unverkennbare Handschrift von WERTGEBUNG.
               </Text>
             </Container>
 
-            <StaticImage
-              src="../images/IMG_0330.jpeg"
-              layout="fullWidth"
-              alt="Jens Herga &amp; Alexander Hörl"
-              loading="lazy"
-              objectFit="contain"
-            />
+            <div data-inviewport="fade-in-right">
+              <StaticImage
+                src="../images/IMG_0330.jpeg"
+                layout="fullWidth"
+                alt="Jens Herga &amp; Alexander Hörl"
+                loading="lazy"
+                objectFit="contain"
+              />
+            </div>
           </TwoColumnGrid>
           <PortfolioMap />
         </Main>
