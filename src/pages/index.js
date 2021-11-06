@@ -20,13 +20,16 @@ import {
   useWindowDimensions,
 } from '../utils/hooks'
 import {
+  Center,
   Container,
   fontSizes,
   TwoColumnGrid,
   Text,
+  Button,
   Delayed,
   DisableRender,
   breakpoints,
+  space,
 } from '../utils/styles'
 import './styles.css'
 
@@ -222,6 +225,9 @@ function IndexPage() {
             </div>
           </TwoColumnGrid>
           <PortfolioMap />
+          <Center style={{ marginTop: space[8], marginBottom: space[8] }}>
+            <Button href="/Portfolio.pdf">Portfolio herunterladen</Button>
+          </Center>
         </Main>
         <Footer color="white" />
       </MainWrapper>

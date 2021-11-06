@@ -50,19 +50,6 @@ const Footer = ({ color = 'black' }) => {
           </address>
         </div>
 
-        <div>
-          <ExternalLink
-            href="/AGB.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            AGB
-          </ExternalLink>
-          <br />
-          <InternalLink to="/impressum">Impressum</InternalLink>
-          <br />© {new Date().getFullYear()} {title}
-        </div>
-
         <SocialMediaLinks color={color}>
           {socialLinks.map(({ name, link }) => {
             return (
@@ -80,6 +67,19 @@ const Footer = ({ color = 'black' }) => {
             )
           })}
         </SocialMediaLinks>
+
+        <div>
+          <ExternalLink
+            href="/AGB.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AGB
+          </ExternalLink>
+          <br />
+          <InternalLink to="/impressum">Impressum</InternalLink>
+          <br />© {new Date().getFullYear()} {title}
+        </div>
       </Wrapper>
     </Container>
   )

@@ -64,6 +64,10 @@ export const SocialMediaLinks = styled.ul`
     text-decoration: none;
     margin-left: 5px;
   }
+
+  @media (max-width: ${breakpoints.s}px) {
+    margin-top: ${space[10]};
+  }
 `
 
 export const Cards = styled.div`

@@ -116,6 +116,8 @@ export const Delayed = ({ children, delay = 500 }) => {
 }
 
 export const Center = styled.div`
+  display: flex;
+  justify-content: center;
   text-align: center;
 `
 
@@ -181,5 +183,41 @@ export const ExternalLink = styled(OutboundLink)`
   &:hover,
   &:active {
     color: ${colors.carminePink};
+  }
+`
+
+export const Button = styled.a`
+  position: relative;
+  display: inline-block;
+  padding: ${space[4]} ${space[8]};
+  border: 2px solid white;
+  color: white;
+  font-size: ${fontSizes.xl};
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.3s;
+
+  &:hover {
+    color: black;
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    content: '';
+    background: white;
+    transition: transform 0.3s;
+    transform-origin: left top;
+    transform: scale(1, 0);
+  }
+
+  &:hover::before {
+    transform-origin: left bottom;
+    transform: scale(1, 1);
   }
 `
