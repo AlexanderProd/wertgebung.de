@@ -226,7 +226,9 @@ function IndexPage() {
           </TwoColumnGrid>
           <PortfolioMap />
           <Center style={{ marginTop: space[8], marginBottom: space[8] }}>
-            <Button href="/Portfolio.pdf">Portfolio herunterladen</Button>
+            <Button href="/Portfolio.pdf" target="_blank">
+              Portfolio herunterladen
+            </Button>
           </Center>
         </Main>
         <Footer color="white" />
