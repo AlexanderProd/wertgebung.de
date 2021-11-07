@@ -26,12 +26,12 @@ export const Wrapper = styled.footer`
   }
 `
 
-export const Links = styled.div`
+export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 
   @media (max-width: ${breakpoints.s}px) {
     margin-bottom: 2rem;
