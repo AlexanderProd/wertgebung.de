@@ -115,9 +115,39 @@ export const Delayed = ({ children, delay = 500 }) => {
   return isShown ? children : null
 }
 
+export const H1 = styled.h1`
+  font-size: ${fontSizes['8xl']};
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes['6xl']};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes['5xl']};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes['4xl']};
+  }
+`
+
+export const H2 = styled.h1`
+  font-size: ${fontSizes['6xl']};
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes['5xl']};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes['4xl']};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes['3xl']};
+  }
+`
+
 export const Center = styled.div`
-  display: flex;
-  justify-content: center;
   text-align: center;
 `
 
@@ -155,7 +185,7 @@ export const TwoColumnGrid = styled.div`
 export const Text = styled.p`
   color: ${({ color }) => (color ? color : colors.concrete)};
   line-height: ${lineHeights.base};
-  font-size: ${fontSizes['3xl']};
+  font-size: ${fontSizes['2xl']};
 
   @media (max-width: ${breakpoints.s}px) {
     font-size: ${fontSizes.sm};

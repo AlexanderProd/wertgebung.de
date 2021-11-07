@@ -22,7 +22,6 @@ import {
 import {
   Center,
   Container,
-  fontSizes,
   TwoColumnGrid,
   Text,
   Button,
@@ -30,6 +29,8 @@ import {
   DisableRender,
   breakpoints,
   space,
+  H1,
+  H2,
 } from '../utils/styles'
 import './styles.css'
 
@@ -49,22 +50,6 @@ const Scroll = styled.div`
 const Main = styled.main`
   width: 100%;
   margin-top: 100vh;
-`
-
-const Headline = styled.h1`
-  font-size: ${fontSizes['8xl']};
-
-  @media (max-width: ${breakpoints.m}px) {
-    font-size: ${fontSizes['6xl']};
-  }
-
-  @media (max-width: ${breakpoints.s}px) {
-    font-size: ${fontSizes['5xl']};
-  }
-
-  @media (max-width: ${breakpoints.xs}px) {
-    font-size: ${fontSizes['4xl']};
-  }
 `
 
 const Overlay = styled.div`
@@ -135,7 +120,7 @@ function IndexPage() {
 
   // Fade in SwipeDownIcon
   useEffect(() => {
-    setTimeout(() => setIconVisible(true), 4000)
+    setTimeout(() => setIconVisible(true), 1000)
   }, [ready])
 
   // Fade out SwipeDownIcon
@@ -198,13 +183,15 @@ function IndexPage() {
 
         <Main ref={mainRef}>
           <Container>
-            <Headline>
+            <H1>
               Wir entwickeln innovative Erlebnisse durch das perfekte
               Zusammenspiel von Technologie und Design.
-            </Headline>
+            </H1>
           </Container>
 
-          <TwoColumnGrid style={{ marginTop: '300px', marginBottom: '300px' }}>
+          <TwoColumnGrid
+            style={{ marginTop: space[72], marginBottom: space[72] }}
+          >
             <Container>
               <Text>
                 Hinter WERTGEBUNG stecken Jens Herga und Alexander Hörl.
@@ -224,11 +211,21 @@ function IndexPage() {
               />
             </div>
           </TwoColumnGrid>
-          <PortfolioMap />
+
           <Center style={{ marginTop: space[8], marginBottom: space[8] }}>
             <Button href="/Portfolio.pdf" target="_blank">
               Portfolio herunterladen
             </Button>
+          </Center>
+
+          <PortfolioMap />
+          <Center style={{ marginTop: space[72], marginBottom: space[72] }}>
+            <H2>Bereit für Innovation?</H2>
+            <Text>
+              Sie haben Interesse an einer Zusammenarbeit?
+              <br /> Schreibe Sie uns für wertgebende Momente.
+            </Text>
+            <Button href="mailto:info@wertgebung.de">Jetzt kontaktieren</Button>
           </Center>
         </Main>
         <Footer color="white" />
