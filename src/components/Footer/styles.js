@@ -4,13 +4,11 @@ import { Link } from 'gatsby'
 import { breakpoints, space } from '../../utils/styles'
 
 export const Wrapper = styled.footer`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 20px;
-  grid-template-areas: '. . . .';
-  margin-top: 5rem;
-  padding-bottom: 1.45rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: ${space[12]};
+  padding-bottom: ${space[6]};
 
   @media (max-width: ${breakpoints.s}px) {
     display: flex;
@@ -33,7 +31,7 @@ export const Column = styled.div`
   align-content: center;
   align-items: center;
 
-  @media (max-width: ${breakpoints.l}px) {
+  @media (max-width: ${breakpoints.s}px) {
     display: block;
     margin-bottom: ${space[2]};
     align-items: center;
