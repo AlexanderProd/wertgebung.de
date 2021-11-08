@@ -7,7 +7,7 @@ import { isMobileSafari } from 'react-device-detect'
 const CARD_WIDTH = 120
 const CARD_HEIGHT = 80
 
-function Card({ position, img, videoSrc, name, setName }) {
+function Card({ position, img, videoSrc, name, category, link, setCardInfo }) {
   const [hovered, set] = useState(false)
   const [video] = useState(() => {
     if (isMobileSafari) {
@@ -54,11 +54,14 @@ function Card({ position, img, videoSrc, name, setName }) {
       position={position}
       onPointerOver={() => {
         set(true)
-        setName(name)
+        setCardInfo({
+          name,
+          category,
+          link,
+        })
       }}
       onPointerOut={() => {
         set(false)
-        setName(null)
       }}
     >
       <a.mesh scale-x={scale} scale-y={scale}>

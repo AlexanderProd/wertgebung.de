@@ -193,7 +193,7 @@ function IndexPage() {
             style={{ marginTop: space[72], marginBottom: space[72] }}
           >
             <Container>
-              <Text>
+              <Text style={{ textAlign: 'right' }}>
                 Hinter WERTGEBUNG stecken Jens Herga und Alexander Hörl.
                 Zusammengefunden haben sie schon während ihrer Schulzeit, durch
                 Ihr gemeinsames Interesse an Design. Seither bestimmt dieser
@@ -203,7 +203,7 @@ function IndexPage() {
 
             <div data-inviewport="fade-in-right">
               <StaticImage
-                src="../images/IMG_0330.jpeg"
+                src="../images/alexand_hoerl_jens_herga.jpeg"
                 layout="fullWidth"
                 alt="Jens Herga &amp; Alexander Hörl"
                 loading="lazy"
@@ -212,21 +212,26 @@ function IndexPage() {
             </div>
           </TwoColumnGrid>
 
+          <PortfolioMap />
+
           <Center style={{ marginTop: space[8], marginBottom: space[8] }}>
             <Button href="/Portfolio.pdf" target="_blank">
               Portfolio herunterladen
             </Button>
           </Center>
 
-          <PortfolioMap />
-          <Center style={{ marginTop: space[72], marginBottom: space[72] }}>
-            <H2>Bereit für Innovation?</H2>
-            <Text>
-              Sie haben Interesse an einer Zusammenarbeit?
-              <br /> Schreibe Sie uns für wertgebende Momente.
-            </Text>
-            <Button href="mailto:info@wertgebung.de">Jetzt kontaktieren</Button>
-          </Center>
+          <Container style={{ marginTop: space[72], marginBottom: space[72] }}>
+            <Center>
+              <H2>Bereit für Innovation?</H2>
+              <Text>
+                Sie haben Interesse an einer Zusammenarbeit?
+                <br /> Schreibe Sie uns für wertgebende Momente.
+              </Text>
+              <Button href="mailto:info@wertgebung.de">
+                Jetzt kontaktieren
+              </Button>
+            </Center>
+          </Container>
         </Main>
         <Footer color="white" />
       </MainWrapper>

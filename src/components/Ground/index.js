@@ -1,10 +1,13 @@
 import React from 'react'
 import { Reflector, useTexture } from '@react-three/drei'
 
+import surfaceImperfections from '../../images/SurfaceImperfections003_1K_var1.jpg'
+import surfaceImperfections_Normal from '../../images/SurfaceImperfections003_1K_Normal.jpg'
+
 function Ground({ width = 20, length = 10, ...props }) {
   const [floor, normal] = useTexture([
-    '/SurfaceImperfections003_1K_var1.jpg',
-    '/SurfaceImperfections003_1K_Normal.jpg',
+    surfaceImperfections,
+    surfaceImperfections_Normal,
   ])
   return (
     <Reflector

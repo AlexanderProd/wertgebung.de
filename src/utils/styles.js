@@ -131,7 +131,7 @@ export const H1 = styled.h1`
   }
 `
 
-export const H2 = styled.h1`
+export const H2 = styled.h2`
   font-size: ${fontSizes['6xl']};
 
   @media (max-width: ${breakpoints.m}px) {
@@ -144,6 +144,39 @@ export const H2 = styled.h1`
 
   @media (max-width: ${breakpoints.xs}px) {
     font-size: ${fontSizes['3xl']};
+  }
+`
+
+export const H3 = styled.h3`
+  font-size: ${fontSizes['4xl']};
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes['3xl']};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes['2xl']};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes['xl']};
+  }
+`
+
+export const H4 = styled.h4`
+  font-size: ${fontSizes['3xl']};
+  margin: ${space[2]} 0;
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes['2xl']};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    font-size: ${fontSizes['xl']};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes.lg};
   }
 `
 

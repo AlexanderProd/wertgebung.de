@@ -33,8 +33,9 @@ export const Column = styled.div`
   align-content: center;
   align-items: center;
 
-  @media (max-width: ${breakpoints.s}px) {
-    margin-bottom: 2rem;
+  @media (max-width: ${breakpoints.l}px) {
+    display: block;
+    margin-bottom: ${space[2]};
     align-items: center;
   }
 `

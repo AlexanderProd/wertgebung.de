@@ -4,11 +4,17 @@ import { Canvas, useThree } from '@react-three/fiber'
 import { MapControls } from '@react-three/drei'
 import { a, useSpring } from '@react-spring/three'
 import { isBrowser } from '@emotion/utils'
-import { isMobileSafari } from 'react-device-detect'
 
-import { breakpoints, DisableRender } from '../../utils/styles'
+import {
+  breakpoints,
+  DisableRender,
+  ExternalLink,
+  H4,
+  Text,
+} from '../../utils/styles'
 import { useOnScreen, useWindowDimensions } from '../../utils/hooks'
 import { Wrapper, Overlay } from './styles'
+import data from './data'
 import Card from './Card'
 
 const Controls = () => {
@@ -45,9 +51,15 @@ const Controls = () => {
   )
 }
 
+const defaultCardInfo = {
+  name: '',
+  category: '',
+  link: '',
+}
+
 function PortfolioMap() {
   const [down, setDown] = useState(false)
-  const [name, setName] = useState(null)
+  const [cardInfo, setCardInfo] = useState(defaultCardInfo)
   const wrapperRef = useRef()
   const visible = useOnScreen(wrapperRef)
   const { width } = useWindowDimensions()
@@ -84,7 +96,17 @@ function PortfolioMap() {
       onPointerOut={() => (document.body.style.cursor = 'auto')}
       onPointerOver={() => (document.body.style.cursor = 'grab')}
     >
-      <Overlay>{name}</Overlay>
+      <Overlay>
+        <H4>{cardInfo.name}</H4>
+        <Text style={{ margin: 0 }}>{cardInfo.category}</Text>
+        <ExternalLink
+          href={cardInfo.link.replace(/https:\/\/|http:\/\//)}
+          target="_blank"
+        >
+          {cardInfo.link}
+        </ExternalLink>
+      </Overlay>
+
       <Canvas
         orthographic
         frameloop="demand"
@@ -101,36 +123,30 @@ function PortfolioMap() {
             rotation-z={rotation}
           >
             <Card
-              img="/lws_3-2.jpg"
               position={[-135, 0, 0]}
-              name="Lightweight System"
-              setName={setName}
+              setCardInfo={setCardInfo}
+              {...data['lws']}
             />
             <Card
-              img="/huwat_3-2.jpg"
               position={[0, 0, 0]}
-              name="Huwat"
-              setName={setName}
+              setCardInfo={setCardInfo}
+              {...data['huwat']}
             />
             <Card
-              img="/lucinski_3-2.jpg"
               position={[135, 0, 0]}
-              name="Lucinski"
-              setName={setName}
+              setCardInfo={setCardInfo}
+              {...data['lucinski']}
             />
             <Card
-              img="/kleine-eismanufaktur_3-2.jpg"
-              videoSrc="/sequenz.mp4"
               position={[-135, -95, 0]}
-              name="Kleine Eismanufaktur"
-              setName={setName}
+              setCardInfo={setCardInfo}
+              {...data['eismanufaktur']}
             />
             <Card
-              img="/nureinberg_3-2.jpg"
               position={[0, -95, 0]}
-              name="NurEinBerg"
-              setName={setName}
-            />
+              setCardInfo={setCardInfo}
+              {...data['nureinberg']}
+            />{' '}
           </a.group>
         </Suspense>
         <Controls />
