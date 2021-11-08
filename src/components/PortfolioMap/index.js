@@ -99,11 +99,8 @@ function PortfolioMap() {
       <Overlay>
         <H4>{cardInfo.name}</H4>
         <Text style={{ margin: 0 }}>{cardInfo.category}</Text>
-        <ExternalLink
-          href={cardInfo.link.replace(/https:\/\/|http:\/\//)}
-          target="_blank"
-        >
-          {cardInfo.link}
+        <ExternalLink href={cardInfo.link} target="_blank">
+          {cardInfo.link.replace(/https:\/\/|http:\/\//g, '')}
         </ExternalLink>
       </Overlay>
 
