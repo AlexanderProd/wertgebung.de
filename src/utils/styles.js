@@ -283,4 +283,17 @@ export const Button = styled.a`
     transform-origin: left bottom;
     transform: scale(1, 1);
   }
+
+  @media (max-width: ${breakpoints.m}px) {
+    font-size: ${fontSizes.lg};
+  }
+
+  @media (max-width: ${breakpoints.s}px) {
+    padding: ${space[2]} ${space[4]};
+    font-size: ${fontSizes.md};
+  }
+
+  @media (max-width: ${breakpoints.xs}px) {
+    font-size: ${fontSizes.sm};
+  }
 `

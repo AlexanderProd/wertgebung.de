@@ -7,8 +7,6 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { animated, useSpring } from '@react-spring/web'
 
 import Seo from '../components/seo'
-//import Overlay from '../components/Overlay'
-//import LoadingScreen from '../components/LoadingScreen'
 import Ground from '../components/Ground'
 import VideoText from '../components/VideoText'
 import PortfolioMap from '../components/PortfolioMap'
@@ -225,7 +223,7 @@ function IndexPage() {
               <H2>Bereit für Innovation?</H2>
               <Text>
                 Sie haben Interesse an einer Zusammenarbeit?
-                <br /> Schreibe Sie uns für wertgebende Momente.
+                <br /> Schreiben Sie uns für wertgebende Momente.
               </Text>
               <Button href="mailto:info@wertgebung.de">
                 Jetzt kontaktieren

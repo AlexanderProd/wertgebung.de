@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Text } from '@react-three/drei'
 import { a, useSpring } from '@react-spring/three'
 
