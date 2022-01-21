@@ -32,11 +32,11 @@ const Footer = ({ color = 'black' }) => {
       <Wrapper>
         <Column>
           <div>
-            <h4>Office Nürnberg</h4>
+            <h4>Office Fürth</h4>
             <address>
               Wertgebung
-              <br /> Steilstraße 1A
-              <br /> 90513 Zirndorf
+              <br /> Benno-Strauß-Straße 5A
+              <br /> 90763 Fürth
               <br /> Germany
             </address>
           </div>
